@@ -92,7 +92,7 @@ geo_df = pd.read_csv('https://drive.google.com/file/d/19z04DruqE6GtiLSWNfsayTy9z
 
 # Sidebar configuration
 with st.sidebar:
-    st.image("https://raw.githubusercontent.com/mhdhfzz/data-analyst-dicoding/main/dashboard/logo.png", width=100)
+    st.image("https://github.com/maryatra/Data-analyst-dicoding/blob/cbe56f724a94c02ab8f30853b051fcf25121e902/dashboard/pngwing.com%20(1).png", width=100)
     start_date, end_date = st.date_input("Select Date Range", [all_df["order_approved_at"].min(), all_df["order_approved_at"].max()])
 
 # Filter data based on date range
