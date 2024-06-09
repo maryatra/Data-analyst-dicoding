@@ -1,5 +1,5 @@
 # E-Commerce Public Data Analysis with Python - Dicoding
-![E-Commerce Data Dashboard](Recording 2024-06-10 004817.mp4)
+![E-Commerce Data Dashboard](```)
 
 [E-Commerce Data Dashboard Streamlit App](https://data-analyst-dicoding-aiv6uwrevtjsz9pzyswzrw.streamlit.app/)
 
@@ -48,6 +48,8 @@ streamlit run dashboard.py
 Access the dashboard in your web browser at `http://localhost:8501`.
 
 ## Data Sources
-1. data source git https://github.com/maryatra/Data-analyst-dicoding/tree/9d8ca81738322e32b09463fb6fc13349d9b229cb/Data 
-
-2. [Dicoding](https://www.dicoding.com/).
+1. data source
+```
+git https://github.com/maryatra/Data-analyst-dicoding/tree/9d8ca81738322e32b09463fb6fc13349d9b229cb/Data 
+```
+4. [Dicoding](https://www.dicoding.com/).
