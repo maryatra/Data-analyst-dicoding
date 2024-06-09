@@ -73,6 +73,10 @@ csv_url = "https://raw.githubusercontent.com/mhdhfzz/data-analyst-dicoding/main/
 all_df = pd.read_csv(csv_url)
 print("CSV Columns:", all_df.columns.tolist())
 
+# Display data preview
+st.write("Data Preview Combined:")
+st.write(all_df.head())  # Menampilkan lima baris pertama data
+
 datetime_cols = [
     "order_approved_at", "order_delivered_carrier_date",
     "order_delivered_customer_date", "order_estimated_delivery_date",
@@ -87,8 +91,23 @@ all_df[datetime_cols] = all_df[datetime_cols].apply(pd.to_datetime, errors='coer
 all_df.sort_values(by="order_approved_at", inplace=True)
 all_df.reset_index(drop=True, inplace=True)
 
+# st.subheader("Data Combined")
+# all_data_df.groupby('customer_state').agg({
+#     'order_id': 'nunique',
+#     'payment_value': 'sum'
+# }).sort_values(by='payment_value', ascending=False)
+
+# all_data_df.groupby('product_category_name_english').agg({
+#     'order_id': 'nunique',
+#     'review_score': ['min', 'max']
+#})
+
 # Load the geolocation dataset
 geo_df = pd.read_csv('https://raw.githubusercontent.com/mhdhfzz/data-analyst-dicoding/main/dashboard/geolocation.csv').drop_duplicates(subset='customer_unique_id')
+
+# Display data preview
+st.write("Data Preview Geo:")
+st.write(geo_df.head())  # Menampilkan lima baris pertama data
 
 # Sidebar configuration
 with st.sidebar:
@@ -136,6 +155,10 @@ ax.tick_params(axis="x", rotation=45)
 ax.tick_params(axis="y", labelsize=15)
 st.pyplot(fig)
 
+with st.expander("See Explanation"):
+    st.write(
+        "Most products in the top 50 saw an increased likelihood of sales during Black Friday (BF). Top-performing products on Black Friday are highly rated (usually best sellers).")
+
 # Order Items Visualization
 st.subheader("Order Items")
 st.markdown(f"Total Items: **{order_items_data['product_count'].sum()}**")
@@ -179,6 +202,11 @@ for index, value in enumerate(review_data.values):
     ax.text(index, value + 5, str(value), ha='center', va='bottom', fontsize= 12 )
 
 st.pyplot(fig)
+with st.expander("See Explanation"):
+    st.write(
+        "The company makes more money not by selling a high volume of products but by selling a variety of products, each priced between 50-500 R$ and with a low probability of selling.")
+
+
 # Customer Demographic Visualization
 st.subheader("Customer Demographic")
 tab1, tab2 = st.tabs(["State", "Geolocation"])
