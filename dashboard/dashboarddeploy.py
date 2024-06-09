@@ -69,7 +69,7 @@ class BrazilMapPlotter:
 sns.set(style='dark')
 
 # Load the main dataset and geolocation dataset
-csv_url = "https://raw.githubusercontent.com/mhdhfzz/data-analyst-dicoding/main/dashboard/df.csv"
+csv_url = "https://drive.google.com/file/d/1fDcbG18iBFT7sH2EeWcW3_3P97Gc2KeP/view?usp=drive_link"
 all_df = pd.read_csv(csv_url)
 print("CSV Columns:", all_df.columns.tolist())
 
@@ -88,7 +88,7 @@ all_df.sort_values(by="order_approved_at", inplace=True)
 all_df.reset_index(drop=True, inplace=True)
 
 # Load the geolocation dataset
-geo_df = pd.read_csv('https://raw.githubusercontent.com/mhdhfzz/data-analyst-dicoding/main/dashboard/geolocation.csv').drop_duplicates(subset='customer_unique_id')
+geo_df = pd.read_csv('https://drive.google.com/file/d/19z04DruqE6GtiLSWNfsayTy9zZQisOUN/view?usp=sharing').drop_duplicates(subset='customer_unique_id')
 
 # Sidebar configuration
 with st.sidebar:
