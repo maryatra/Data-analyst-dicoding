@@ -69,7 +69,7 @@ class BrazilMapPlotter:
 sns.set(style='dark')
 
 # Load the main dataset and geolocation dataset
-csv_url = "https://raw.githubusercontent.com/mhdhfzz/data-analyst-dicoding/main/dashboard/df.csv"
+csv_url = "https://raw.githubusercontent.com/maryatra/Data-analyst-dicoding/main/Data/df.csv"
 all_df = pd.read_csv(csv_url)
 print("CSV Columns:", all_df.columns.tolist())
 
@@ -103,7 +103,7 @@ all_df.reset_index(drop=True, inplace=True)
 #})
 
 # Load the geolocation dataset
-geo_df = pd.read_csv('https://raw.githubusercontent.com/mhdhfzz/data-analyst-dicoding/main/dashboard/geolocation.csv').drop_duplicates(subset='customer_unique_id')
+geo_df = pd.read_csv('https://raw.githubusercontent.com/maryatra/Data-analyst-dicoding/main/Data/geolocation.csv').drop_duplicates(subset='customer_unique_id')
 
 # Display data preview
 st.write("Data Preview Geo:")
