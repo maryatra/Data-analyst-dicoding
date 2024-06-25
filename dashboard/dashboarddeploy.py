@@ -178,31 +178,35 @@ with st.expander("See Explanation"):
 # Order Items Visualization
 #New
 # Top Categories by Orders Visualization
+# Top Categories by Orders Visualization
 st.subheader("Top 10 Most Ordered Product Categories")
 
-fig, ax = plt.subplots(figsize=(20, 8))
-top_categories_orders.plot(kind='bar', ax=ax, color='#86bf91', zorder=2, width=0.85)
-ax.set_title('Top 10 Most Ordered Product Categories')
-ax.set_xlabel('Product Category')
-ax.set_ylabel('Number of Orders')
-ax.tick_params(axis="x", rotation=45, horizontalalignment='right')
-ax.grid(True, axis='y')
-st.pyplot(fig)
+try:
+    fig, ax = plt.subplots(figsize=(20, 8))
+    top_categories_orders.plot(kind='bar', ax=ax, color='#86bf91', zorder=2, width=0.85)
+    ax.set_title('Top 10 Most Ordered Product Categories')
+    ax.set_xlabel('Product Category')
+    ax.set_ylabel('Number of Orders')
+    ax.tick_params(axis="x", rotation=45)
+    ax.grid(True, axis='y')
+    st.pyplot(fig)
+except ValueError as e:
+    st.error(f"An error occurred while plotting Top Categories by Orders: {e}")
 
 # Top Categories by Sales Visualization
 st.subheader("Top 10 Product Categories by Sales Value")
 
-fig, ax = plt.subplots(figsize=(20, 8))
-top_categories_sales.plot(kind='bar', ax=ax, color='#86bf91', zorder=2, width=0.85)
-ax.set_title('Top 10 Product Categories by Sales Value')
-ax.set_xlabel('Product Category')
-ax.set_ylabel('Total Sales Value')
-ax.tick_params(axis="x", rotation=45, horizontalalignment='right')
-ax.grid(True, axis='y')
-st.pyplot(fig)
-with st.expander("See Explanation"):
-    st.write(
-        "The top  10 can be seen in the graph.")
+try:
+    fig, ax = plt.subplots(figsize=(20, 8))
+    top_categories_sales.plot(kind='bar', ax=ax, color='#86bf91', zorder=2, width=0.85)
+    ax.set_title('Top 10 Product Categories by Sales Value')
+    ax.set_xlabel('Product Category')
+    ax.set_ylabel('Total Sales Value')
+    ax.tick_params(axis="x", rotation=45)
+    ax.grid(True, axis='y')
+    st.pyplot(fig)
+except ValueError as e:
+    st.error(f"An error occurred while plotting Top Categories by Sales Value: {e}")
 
 
 st.subheader("Order Items")
