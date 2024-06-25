@@ -105,17 +105,6 @@ all_df[datetime_cols] = all_df[datetime_cols].apply(pd.to_datetime, errors='coer
 all_df.sort_values(by="order_approved_at", inplace=True)
 all_df.reset_index(drop=True, inplace=True)
 
-# st.subheader("Data Combined")
-# all_data_df.groupby('customer_state').agg({
-#     'order_id': 'nunique',
-#     'payment_value': 'sum'
-# }).sort_values(by='payment_value', ascending=False)
-
-# all_data_df.groupby('product_category_name_english').agg({
-#     'order_id': 'nunique',
-#     'review_score': ['min', 'max']
-#})
-
 # Load the geolocation dataset
 geo_df = pd.read_csv('https://raw.githubusercontent.com/maryatra/Data-analyst-dicoding/main/Data/geolocation.csv').drop_duplicates(subset='customer_unique_id')
 
@@ -253,9 +242,9 @@ for index, value in enumerate(review_data.values):
     ax.text(index, value + 5, str(value), ha='center', va='bottom', fontsize= 12 )
 
 st.pyplot(fig)
-# with st.expander("See Explanation"):
-#     st.write(
-#         "Based On chart the top sales occupied by product called cama_mesa_banho and the rest is visualized in chart above and the based on the values is just little bit different.")
+with st.expander("See Explanation"):
+    st.write(
+        "Based On chart the top sales occupied by product called cama_mesa_banho and the rest is visualized in chart above and the based on the values is just little bit different.")
 
 
 # Customer Demographic Visualization
