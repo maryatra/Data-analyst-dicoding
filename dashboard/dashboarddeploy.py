@@ -255,7 +255,7 @@ for index, value in enumerate(review_data.values):
 st.pyplot(fig)
 with st.expander("See Explanation"):
     st.write(
-        "Based On chart the top sales occupied by product called cama_mesa_banho and the rest is visualized in chart above and the based on yhe values is just little bit different.")
+        "Based On chart the top sales occupied by product called cama_mesa_banho and the rest is visualized in chart above and the based on the values is just little bit different.")
 
 
 # Customer Demographic Visualization
