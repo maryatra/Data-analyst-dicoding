@@ -207,6 +207,10 @@ try:
     st.pyplot(fig)
 except ValueError as e:
     st.error(f"An error occurred while plotting Top Categories by Sales Value: {e}")
+    with st.expander("See Explanation"):
+    st.write(
+        "Based On chart the top sales occupied by product called cama_mesa_banho and the rest is visualized in chart above and the based on yhe values is just little bit different.")
+
 
 
 st.subheader("Order Items")
