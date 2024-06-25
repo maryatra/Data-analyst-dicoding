@@ -160,6 +160,42 @@ with st.expander("See Explanation"):
         "Most products in the top 50 saw an increased likelihood of sales during Black Friday (BF). Top-performing products on Black Friday are highly rated (usually best sellers).")
 
 # Order Items Visualization
+#New
+# Merging products dataset with items dataset
+items_product = data['items'].merge(data['products'], on='product_id', how='inner')
+orders_ip = data['orders'].merge(items_product, on='order_id', how='inner')
+
+# Grouping by product category to get the order count
+categories_by_orders = orders_ip['product_category_name'].value_counts()
+
+st.header('Top 10 Most Ordered Product Categories')
+fig, ax = plt.subplots(figsize=(20, 8))
+categories_by_orders[:10].plot(kind='bar', color='#86bf91', zorder=2, width=0.85, ax=ax)
+ax.set_title('Top 10 Most Ordered Product Categories')
+ax.set_xlabel('Product Category')
+ax.set_ylabel('Number of Orders')
+ax.set_xticklabels(ax.get_xticklabels(), rotation=45, horizontalalignment='right')
+ax.grid(True, axis='y')
+st.pyplot(fig)
+
+# Calculating total sales value for each product category
+items_product['total'] = items_product['price'] * items_product['order_item_id']
+categories_by_sales = items_product.groupby('product_category_name').total.sum().sort_values(ascending=False)
+
+st.header('Top 10 Product Categories by Sales Value')
+fig, ax = plt.subplots(figsize=(20, 8))
+categories_by_sales[:10].plot(kind='bar', color='#86bf91', zorder=2, width=0.85, ax=ax)
+ax.set_title('Top 10 Product Categories by Sales Value')
+ax.set_xlabel('Product Category')
+ax.set_ylabel('Total Sales Value')
+ax.set_xticklabels(ax.get_xticklabels(), rotation=45, horizontalalignment='right')
+ax.grid(True, axis='y')
+st.pyplot(fig)
+with st.expander("See Explanation"):
+    st.write(
+        "The top  10 can be seen in the graph.")
+
+
 st.subheader("Order Items")
 st.markdown(f"Total Items: **{order_items_data['product_count'].sum()}**")
 st.markdown(f"Average Items: **{order_items_data['product_count'].mean()}**")
