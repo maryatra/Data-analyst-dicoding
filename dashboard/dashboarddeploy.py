@@ -255,7 +255,7 @@ for index, value in enumerate(review_data.values):
 st.pyplot(fig)
 with st.expander("See Explanation"):
     st.write(
-        "The company makes more money not by selling a high volume of products but by selling a variety of products, each priced between 50-500 R$ and with a low probability of selling.")
+        "Based On chart the top sales occupied by product called cama_mesa_banho and the rest is visualized in chart above and the based on yhe values is just little bit different.")
 
 
 # Customer Demographic Visualization
