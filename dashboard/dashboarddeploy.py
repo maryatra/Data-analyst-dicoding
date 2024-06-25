@@ -44,6 +44,20 @@ class DataAnalyzer:
         order_status_df = self.df['order_status'].value_counts()
         common_status = order_status_df.idxmax()
         return order_status_df, common_status
+    def top_categories_by_orders(self):
+        items_product = self.df[['order_id', 'product_id', 'price']].merge(
+            self.df[['product_id', 'product_category_name_english']], on='product_id', how='inner')
+        orders_ip = self.df[['order_id']].merge(items_product, on='order_id', how='inner')
+        categories_by_orders = orders_ip['product_category_name_english'].value_counts().head(10)
+        return categories_by_orders
+
+    def top_categories_by_sales(self):
+        items_product = self.df[['product_id', 'price', 'order_item_id']].merge(
+            self.df[['product_id', 'product_category_name_english']], on='product_id', how='inner')
+        items_product['total'] = items_product['price'] * items_product['order_item_id']
+        categories_by_sales = items_product.groupby('product_category_name_english')['total'].sum().sort_values(ascending=False).head(10)
+        return categories_by_sales
+
 
 
 # Define BrazilMapPlotter class
@@ -128,6 +142,8 @@ order_items_data = data_analyzer.create_sum_order_items_df()
 review_data, common_review = data_analyzer.review_score_df()
 state_data, common_state = data_analyzer.create_bystate_df()
 order_status_data, common_status = data_analyzer.create_order_status()
+top_categories_orders = data_analyzer.top_categories_by_orders()
+top_categories_sales = data_analyzer.top_categories_by_sales()
 
 # Streamlit app layout
 st.title("E-Commerce Public Data Analysis")
@@ -161,34 +177,27 @@ with st.expander("See Explanation"):
 
 # Order Items Visualization
 #New
-# Merging products dataset with items dataset
-items_product = data['items'].merge(data['products'], on='product_id', how='inner')
-orders_ip = data['orders'].merge(items_product, on='order_id', how='inner')
+# Top Categories by Orders Visualization
+st.subheader("Top 10 Most Ordered Product Categories")
 
-# Grouping by product category to get the order count
-categories_by_orders = orders_ip['product_category_name'].value_counts()
-
-st.header('Top 10 Most Ordered Product Categories')
 fig, ax = plt.subplots(figsize=(20, 8))
-categories_by_orders[:10].plot(kind='bar', color='#86bf91', zorder=2, width=0.85, ax=ax)
+top_categories_orders.plot(kind='bar', ax=ax, color='#86bf91', zorder=2, width=0.85)
 ax.set_title('Top 10 Most Ordered Product Categories')
 ax.set_xlabel('Product Category')
 ax.set_ylabel('Number of Orders')
-ax.set_xticklabels(ax.get_xticklabels(), rotation=45, horizontalalignment='right')
+ax.tick_params(axis="x", rotation=45, horizontalalignment='right')
 ax.grid(True, axis='y')
 st.pyplot(fig)
 
-# Calculating total sales value for each product category
-items_product['total'] = items_product['price'] * items_product['order_item_id']
-categories_by_sales = items_product.groupby('product_category_name').total.sum().sort_values(ascending=False)
+# Top Categories by Sales Visualization
+st.subheader("Top 10 Product Categories by Sales Value")
 
-st.header('Top 10 Product Categories by Sales Value')
 fig, ax = plt.subplots(figsize=(20, 8))
-categories_by_sales[:10].plot(kind='bar', color='#86bf91', zorder=2, width=0.85, ax=ax)
+top_categories_sales.plot(kind='bar', ax=ax, color='#86bf91', zorder=2, width=0.85)
 ax.set_title('Top 10 Product Categories by Sales Value')
 ax.set_xlabel('Product Category')
 ax.set_ylabel('Total Sales Value')
-ax.set_xticklabels(ax.get_xticklabels(), rotation=45, horizontalalignment='right')
+ax.tick_params(axis="x", rotation=45, horizontalalignment='right')
 ax.grid(True, axis='y')
 st.pyplot(fig)
 with st.expander("See Explanation"):
